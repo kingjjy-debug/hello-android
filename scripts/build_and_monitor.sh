@@ -2,25 +2,19 @@
 set -euo pipefail
 
 # 사용법:
-#   ./scripts/build_and_monitor.sh [owner/repo] [--once] [--quiet] [--verbose] [--interval=초]
-# 기본값: --once (첫 폴링 한 번만 출력), interval=5
-#  - --once: 첫 폴링 상태 한 줄만 출력하고 이후엔 결과만 출력
-#  - --quiet: 폴링 중엔 아무 것도 출력하지 않고 마지막 결과만 출력
-#  - --verbose: 매 폴링 상태를 모두 출력(이전 동작)
-#  - --interval=초: 폴링 주기 변경(기본 5초)
+#   ./scripts/build_and_monitor.sh [owner/repo] [--once|--quiet|--verbose] [--interval=초] [--no-empty-commit]
+# 기본값:
+#   - 폴링 출력: --once (한 번만 출력)
+#   - 폴링 주기: 5초
+#   - 변경이 없을 때도 새 런을 보장하려고 기본적으로 빈 커밋을 만들어 트리거합니다.
+#     이를 끄려면 --no-empty-commit
 
 REPO=""
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-HEAD_SHA="$(git rev-parse HEAD)"
 ERROR_LOG="Error_Log.txt"
+ONCE=1; QUIET=0; VERBOSE=0; INTERVAL=5
+ALLOW_EMPTY=1
 
-# 출력 모드
-ONCE=1       # 기본 한 번만
-QUIET=0
-VERBOSE=0
-INTERVAL=5
-
-# 인자 파싱
 for arg in "$@"; do
   case "$arg" in
     */*) REPO="$arg" ;;
@@ -28,22 +22,19 @@ for arg in "$@"; do
     --quiet) QUIET=1; ONCE=0; VERBOSE=0 ;;
     --verbose) VERBOSE=1; ONCE=0; QUIET=0 ;;
     --interval=*) INTERVAL="${arg#*=}" ;;
+    --no-empty-commit) ALLOW_EMPTY=0 ;;
     *) ;;
   esac
 done
 
 # REPO 자동 추론
-if [[ -z "$REPO" ]]; then
+if [[ -z "${REPO}" ]]; then
   OWNER="$(gh api user --jq '.login')"
   NAME="$(basename -s .git "$(git config --get remote.origin.url | sed 's#.*/##' )")"
   if [[ -z "$NAME" ]]; then
     FULL="$(gh repo view --json nameWithOwner --jq .nameWithOwner 2>/dev/null || true)"
-    if [[ -n "$FULL" ]]; then
-      REPO="$FULL"
-    else
-      echo "원격 저장소 정보를 찾을 수 없습니다. 인자로 owner/repo를 전달하세요." >&2
-      exit 1
-    fi
+    [[ -n "$FULL" ]] || { echo "원격 저장소 정보를 찾지 못했습니다. owner/repo 인자를 넘기세요." >&2; exit 1; }
+    REPO="$FULL"
   else
     REPO="${OWNER}/${NAME}"
   fi
@@ -51,42 +42,61 @@ fi
 
 echo "[INFO] Repository: $REPO"
 echo "[INFO] Branch: $BRANCH"
-echo "[INFO] Head SHA: $HEAD_SHA"
 
-# 변경사항 커밋/푸시 (변경 없으면 스킵)
+# 변경사항 커밋(없으면 빈 커밋으로 강제 트리거)
 if ! git diff --quiet || ! git diff --cached --quiet; then
   git add -A
   git commit -m "ci: trigger build at $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+elif (( ALLOW_EMPTY )); then
+  git commit --allow-empty -m "ci: trigger empty build at $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
 fi
-git push origin "$BRANCH" >/dev/null 2>&1 || true
 
-# 최신 head_sha에 해당하는 워크플로 런 ID 찾기
-FIND_RUN_ID() {
-  gh api "repos/${REPO}/actions/runs?branch=${BRANCH}&per_page=30" \
-    --jq ".workflow_runs[] | select(.head_sha==\"${HEAD_SHA}\") | .id" | head -n1
+HEAD_SHA="$(git rev-parse HEAD)"
+echo "[INFO] Head SHA: $HEAD_SHA"
+
+# 푸시 (실패 시 즉시 종료)
+if ! git push origin "$BRANCH"; then
+  {
+    echo "==== Push Failed ===="
+    echo "Repo: ${REPO}"
+    echo "Branch: ${BRANCH}"
+    echo "Commit: ${HEAD_SHA}"
+    echo "Time(UTC): $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+  } > "$ERROR_LOG"
+  echo "❌ PUSH FAILED (세부내용은 ${ERROR_LOG})"
+  exit 2
+fi
+
+echo "[INFO] GitHub Actions 런을 대기합니다 (head_sha 일치 + 가장 최신 created_at)."
+
+# 지정 커밋(HEAD_SHA)의 "가장 최신" 런 ID를 찾는 함수
+FIND_LATEST_RUN_ID() {
+  gh api "repos/${REPO}/actions/runs?branch=${BRANCH}&per_page=50" \
+    --jq "[.workflow_runs[] | select(.head_sha==\"${HEAD_SHA}\")] | sort_by(.created_at) | last | .id" 2>/dev/null
 }
 
-echo "[INFO] GitHub Actions 런을 대기합니다 (head_sha 일치하는 런 검색)."
-
 RUN_ID=""
-for _ in {1..30}; do
-  RUN_ID="$(FIND_RUN_ID || true)"
-  [[ -n "$RUN_ID" ]] && break
+# 런 생성 대기(최대 60초)
+for _ in {1..20}; do
+  RUN_ID="$(FIND_LATEST_RUN_ID || true)"
+  if [[ "${RUN_ID}" != "null" && -n "${RUN_ID}" ]]; then
+    break
+  fi
   sleep 3
 done
 
-if [[ -z "$RUN_ID" ]]; then
+if [[ -z "$RUN_ID" || "$RUN_ID" == "null" ]]; then
   echo "[ERROR] 해당 커밋의 워크플로 런을 찾지 못했습니다." | tee "$ERROR_LOG"
-  exit 2
+  exit 3
 fi
 
 echo "[INFO] Run ID: $RUN_ID"
 
 PRINTED=0
-STATUS=""
-CONCLUSION=""
-
+STATUS=""; CONCLUSION=""
 while :; do
+  # status: queued | in_progress | completed
+  # conclusion: success | failure | cancelled | null(미완료)
   STATUS="$(gh api "repos/${REPO}/actions/runs/${RUN_ID}" --jq '.status')"
   CONCLUSION="$(gh api "repos/${REPO}/actions/runs/${RUN_ID}" --jq '.conclusion')"
 
@@ -96,7 +106,6 @@ while :; do
     echo "[POLL] status=${STATUS} conclusion=${CONCLUSION}"
     PRINTED=1
   fi
-  # QUIET 모드일 땐 폴링 출력 없음
 
   [[ "$STATUS" == "completed" ]] && break
   sleep "$INTERVAL"
@@ -131,5 +140,5 @@ else
   fi
 
   echo "[INFO] 실패 로그가 ${ERROR_LOG} 에 저장되었습니다."
-  exit 3
+  exit 4
 fi
