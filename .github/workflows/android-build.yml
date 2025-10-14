@@ -23,10 +23,11 @@ jobs:
         uses: android-actions/setup-android@v3
 
       - name: Install required SDK components
-        run: |
-          sdkmanager --install "platform-tools" "platforms;android-34" "build-tools;35.0.0"
-          yes | sdkmanager --licenses
         shell: bash
+        run: |
+          sdkmanager --install "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+          # pipefail 환경에서 yes 쪽이 SIGPIPE로 비정상 종료하지 않도록 || true
+          yes | sdkmanager --licenses > /dev/null || true
 
       - name: Setup Gradle (download specific version)
         uses: gradle/gradle-build-action@v2
