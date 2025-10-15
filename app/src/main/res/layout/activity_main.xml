@@ -1,31 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="24dp">
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="H.Point 빠른 연결"
-        android:textSize="20sp"
-        android:paddingBottom="12dp" />
+        android:text="H.Point 바로가기"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#222222"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="16dp" />
 
     <Button
         android:id="@+id/btnEarnPoint"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="포인트 모으기 바로가기"
-        android:padding="12dp"
-        android:layout_marginBottom="12dp" />
+        android:layout_height="56dp"
+        android:text="포인트 모으기"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp" />
 
     <Button
         android:id="@+id/btnConvertToMileage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="마일리지 전환 바로가기"
-        android:padding="12dp" />
+        android:layout_height="56dp"
+        android:text="마일리지로 전환"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp" />
 
 </LinearLayout>
