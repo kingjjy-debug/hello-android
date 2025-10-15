@@ -1,8 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
+        android:name=".HelloApp"
         android:label="Hello"
+        android:supportsRtl="true"
         android:allowBackup="true"
-        android:supportsRtl="true">
+        android:theme="@android:style/Theme.Material.Light.NoActionBar">
 
         <activity
             android:name=".MainActivity"
