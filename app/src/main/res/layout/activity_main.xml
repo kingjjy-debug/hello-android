@@ -1,25 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center">
+    android:padding="24dp">
 
-    <Button
-        android:id="@+id/btnEarnPoint"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/helloText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="포인트 모으기" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="12dp" />
-
-    <Button
-        android:id="@+id/btnConvertToMileage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="마일리지 전환" />
-
-</LinearLayout>
+        android:text="Hello (placeholder)"
+        android:textSize="20sp" />
+</FrameLayout>
