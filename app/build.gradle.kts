@@ -15,18 +15,30 @@ android {
         versionName = "1.0"
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-        }
-        debug {
-            isMinifyEnabled = false
-        }
+    // 🔧 Java 컴파일 타겟을 17로 통일
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    // 🔧 Kotlin 컴파일 타겟도 17로 통일
+    kotlinOptions {
+        jvmTarget = "17"
     }
 
     buildFeatures {
         viewBinding = true
     }
+
+    buildTypes {
+        release { isMinifyEnabled = false }
+        debug { isMinifyEnabled = false }
+    }
+}
+
+// 🔧 Kotlin JVM Toolchain을 17로 고정 (Gradle이 JDK 선택 일관되게)
+kotlin {
+    jvmToolchain(17)
 }
 
 dependencies {
