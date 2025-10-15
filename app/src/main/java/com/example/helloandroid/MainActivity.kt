@@ -26,12 +26,12 @@ data class Partner(
     val limitLabel: String?,
     val earnTips: List<String>,
     val warningText: String,
-    val packageName: String?,        // 실행 대상 앱 패키지
-    val playStoreUrl: String?,       // 구글플레이 웹 URL
-    val earnDeepLink: String?,       // 포인트 모으기용 딥링크/앱링크 URL
-    val convertDeepLink: String?,    // 전환 화면 진입용 딥링크/앱링크 URL
-    val earnWebFallback: String?,    // 최후 웹 폴백
-    val convertWebFallback: String?, // 최후 웹 폴백
+    val packageName: String?,
+    val playStoreUrl: String?,
+    val earnDeepLink: String?,
+    val convertDeepLink: String?,
+    val earnWebFallback: String?,
+    val convertWebFallback: String?,
     val officialDocs: List<String>
 )
 
@@ -48,8 +48,8 @@ class MainActivity : ComponentActivity() {
             warningText = "현금충전·선물·타사전환 포인트는 전환 불가",
             packageName = "kr.co.hpoint.hdgm",
             playStoreUrl = "https://play.google.com/store/apps/details?id=kr.co.hpoint.hdgm",
-            earnDeepLink = "https://www.h-point.co.kr/stack/joy.nhd",       // 포인트 모으기 허브
-            convertDeepLink = "https://www.h-point.co.kr/stack/change.nhd",  // 전환 진입
+            earnDeepLink = "https://www.h-point.co.kr/stack/joy.nhd",
+            convertDeepLink = "https://www.h-point.co.kr/stack/change.nhd",
             earnWebFallback = "https://www.h-point.co.kr/",
             convertWebFallback = "https://www.h-point.co.kr/",
             officialDocs = listOf("https://www.h-point.co.kr/")
@@ -71,12 +71,18 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private fun openInAppWeb(url: String) {
+        startActivity(
+            Intent(this, InAppWebActivity::class.java).putExtra("url", url)
+        )
+    }
+
     private fun openHPointLink(isConvert: Boolean, partner: Partner) {
         val pkg = partner.packageName
         val firstUrl = if (isConvert) partner.convertDeepLink else partner.earnDeepLink
         val lastUrl = if (isConvert) partner.convertWebFallback else partner.earnWebFallback
 
-        // 1) 앱링크를 앱 패키지로 강제 열기 (앱이 해당 URL을 인식하면 바로 해당 화면)
+        // 1) 앱 딥링크 시도 (앱이 인식하면 바로 해당 화면)
         if (pkg != null && firstUrl != null) {
             try {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(firstUrl)).setPackage(pkg)
@@ -85,47 +91,35 @@ class MainActivity : ComponentActivity() {
             } catch (_: Exception) { /* 다음 단계 */ }
         }
 
-        // 2) 앱링크를 일반 VIEW로 열어(패키지 미지정) 앱이 가로채도록 시도
+        // 2) 인앱 웹뷰로 URL 열기 (앱이 못 가로채도 우리 앱 안에서 표시)
         if (firstUrl != null) {
-            try {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(firstUrl)))
-                return
-            } catch (_: Exception) { /* 다음 단계 */ }
+            openInAppWeb(firstUrl)
+            return
         }
 
-        // 3) 앱 메인 실행 (그래도 해당 섹션으로 못 갔을 때 최소한 앱은 켜주자)
+        // 3) 앱 메인 실행
         if (pkg != null) {
             try {
-                val launch = packageManager.getLaunchIntentForPackage(pkg)
-                if (launch != null) {
-                    startActivity(launch)
+                packageManager.getLaunchIntentForPackage(pkg)?.let {
+                    startActivity(it)
                     return
                 }
-            } catch (_: Exception) { /* 다음 단계 */ }
+            } catch (_: Exception) { /* 다음 */ }
         }
 
-        // 4) 마켓 앱 상세
+        // 4) 마켓 앱 상세 (외부)
         if (pkg != null) {
             try {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$pkg")))
                 return
-            } catch (_: ActivityNotFoundException) { /* 다음 단계 */ }
+            } catch (_: ActivityNotFoundException) { /* 다음 */ }
         }
 
-        // 5) 플레이 스토어 웹
-        partner.playStoreUrl?.let {
-            try {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it)))
-                return
-            } catch (_: Exception) { /* 다음 단계 */ }
-        }
+        // 5) 플레이 스토어 웹 (인앱 웹뷰)
+        partner.playStoreUrl?.let { openInAppWeb(it); return }
 
-        // 6) 최후 웹 폴백
-        lastUrl?.let {
-            try {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it)))
-            } catch (_: Exception) { /* 포기 */ }
-        }
+        // 6) 최후 웹 폴백 (인앱 웹뷰)
+        lastUrl?.let { openInAppWeb(it) }
     }
 }
 
