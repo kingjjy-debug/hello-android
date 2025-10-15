@@ -1,211 +1,211 @@
 ==== Build Failed ====
 Repo: kingjjy-debug/hello-android
-Branch: master
-RunID: 18485287633
-Commit: 60bb0ccb5e5122c91ac5ccaa94556c4097b0557e
-Time(UTC): 2025-10-14T04:17:51Z
+Branch: mileage-app
+RunID: 18515226213
+Commit: 002d7dd12e576debb995fd6589a96da06993c7a2
+Time(UTC): 2025-10-15T01:52:18Z
 
 ---- Jobs & Conclusions ----
 build: failure
 
 ---- Tail of Logs (last 200 lines) ----
-build	Setup Android SDK	2025-10-14T04:15:52.2176579Z [==                                     ] 7% Fetch remote repository...         
-build	Setup Android SDK	2025-10-14T04:15:52.2177185Z [==                                     ] 7% Computing updates...               
-build	Setup Android SDK	2025-10-14T04:15:52.2277100Z [===                                    ] 8% Computing updates...               
-build	Setup Android SDK	2025-10-14T04:15:52.2333555Z [===                                    ] 10% Computing updates...              
-build	Setup Android SDK	2025-10-14T04:15:52.2334307Z [=======================================] 100% Computing updates...             
-build	Setup Android SDK	2025-10-14T04:15:52.2338484Z 
-build	Install required SDK components	﻿2025-10-14T04:15:52.2670141Z ##[group]Run sdkmanager --install "platform-tools" "platforms;android-34" "build-tools;34.0.0"
-build	Install required SDK components	2025-10-14T04:15:52.2670794Z [36;1msdkmanager --install "platform-tools" "platforms;android-34" "build-tools;34.0.0"[0m
-build	Install required SDK components	2025-10-14T04:15:52.2671303Z [36;1m# pipefail 환경에서 yes 쪽이 SIGPIPE로 비정상 종료하지 않도록 || true[0m
-build	Install required SDK components	2025-10-14T04:15:52.2671663Z [36;1myes | sdkmanager --licenses > /dev/null || true[0m
-build	Install required SDK components	2025-10-14T04:15:52.2708741Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
-build	Install required SDK components	2025-10-14T04:15:52.2709059Z env:
-build	Install required SDK components	2025-10-14T04:15:52.2709386Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
-build	Install required SDK components	2025-10-14T04:15:52.2709855Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
-build	Install required SDK components	2025-10-14T04:15:52.2710223Z   ANDROID_HOME: /usr/local/lib/android/sdk
-build	Install required SDK components	2025-10-14T04:15:52.2710487Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
-build	Install required SDK components	2025-10-14T04:15:52.2710719Z ##[endgroup]
-build	Install required SDK components	2025-10-14T04:15:53.1173337Z Loading package information...                                                  
-build	Install required SDK components	2025-10-14T04:15:53.2224016Z Loading local repository...                                                     
-build	Install required SDK components	2025-10-14T04:15:53.2225388Z [                                       ] 3% Loading local repository...        
-build	Install required SDK components	2025-10-14T04:15:53.2306583Z [                                       ] 3% Fetch remote repository...         
-build	Install required SDK components	2025-10-14T04:15:53.4759721Z [=                                      ] 3% Fetch remote repository...         
-build	Install required SDK components	2025-10-14T04:15:53.5208520Z [=                                      ] 4% Fetch remote repository...         
-build	Install required SDK components	2025-10-14T04:15:53.5386050Z [=                                      ] 5% Fetch remote repository...         
-build	Install required SDK components	2025-10-14T04:15:53.5728944Z [==                                     ] 5% Fetch remote repository...         
-build	Install required SDK components	2025-10-14T04:15:53.6171790Z [==                                     ] 6% Fetch remote repository...         
-build	Install required SDK components	2025-10-14T04:15:53.6794039Z [==                                     ] 7% Fetch remote repository...         
-build	Install required SDK components	2025-10-14T04:15:53.6798468Z [==                                     ] 7% Computing updates...               
-build	Install required SDK components	2025-10-14T04:15:53.6917670Z [===                                    ] 8% Computing updates...               
-build	Install required SDK components	2025-10-14T04:15:53.6970538Z [===                                    ] 10% Computing updates...              
-build	Install required SDK components	2025-10-14T04:15:53.6974146Z [=======================================] 100% Computing updates...             
-build	Install required SDK components	2025-10-14T04:15:53.6975667Z 
-build	Install required SDK components	2025-10-14T04:15:55.1377393Z yes: standard output: Broken pipe
-build	Setup Gradle (download specific version)	﻿2025-10-14T04:15:55.1489448Z ##[group]Run gradle/gradle-build-action@v2
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.1489752Z with:
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.1489925Z   gradle-version: 8.8
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.1490117Z   cache-disabled: false
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.1490319Z   cache-read-only: false
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.1490515Z   cache-write-only: false
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.1490731Z   cache-overwrite-existing: false
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.1491004Z   gradle-home-cache-includes: caches
+build	Setup Android SDK	2025-10-15T01:50:22.4041611Z [==============================         ] 77% Unzipping... tools/bin/lint       
+build	Setup Android SDK	2025-10-15T01:50:22.4044164Z [==============================         ] 77% Unzipping... tools/bin/screenshot2
+build	Setup Android SDK	2025-10-15T01:50:22.4067415Z [==============================         ] 77% Unzipping... tools/NOTICE.txt     
+build	Setup Android SDK	2025-10-15T01:50:22.4103998Z [==============================         ] 77% Unzipping... tools/emulator       
+build	Setup Android SDK	2025-10-15T01:50:22.4128147Z [==============================         ] 77% Unzipping... tools/emulator-check 
+build	Setup Android SDK	2025-10-15T01:50:22.4130772Z [==============================         ] 77% Unzipping... tools/monitor        
+build	Setup Android SDK	2025-10-15T01:50:22.4133026Z [==============================         ] 77% Unzipping... tools/android        
+build	Setup Android SDK	2025-10-15T01:50:22.4135972Z [==============================         ] 77% Unzipping... tools/mksdcard       
+build	Setup Android SDK	2025-10-15T01:50:22.4136678Z [==============================         ] 77% Unzipping... tools/support/       
+build	Setup Android SDK	2025-10-15T01:50:22.4141837Z [==============================         ] 77% Unzipping... tools/support/typos-d
+build	Setup Android SDK	2025-10-15T01:50:22.4145413Z [==============================         ] 77% Unzipping... tools/support/typos-e
+build	Setup Android SDK	2025-10-15T01:50:22.4147675Z [==============================         ] 77% Unzipping... tools/support/annotat
+build	Setup Android SDK	2025-10-15T01:50:22.4155276Z [==============================         ] 77% Unzipping... tools/support/typos-e
+build	Setup Android SDK	2025-10-15T01:50:22.4158489Z [==============================         ] 77% Unzipping... tools/support/typos-t
+build	Setup Android SDK	2025-10-15T01:50:22.4163113Z [==============================         ] 77% Unzipping... tools/support/typos-p
+build	Setup Android SDK	2025-10-15T01:50:22.4166329Z [==============================         ] 77% Unzipping... tools/support/typos-i
+build	Setup Android SDK	2025-10-15T01:50:22.4169267Z [==============================         ] 77% Unzipping... tools/support/typos-n
+build	Setup Android SDK	2025-10-15T01:50:22.4172596Z [==============================         ] 77% Unzipping... tools/support/typos-h
+build	Setup Android SDK	2025-10-15T01:50:22.4467765Z [==============================         ] 78% Unzipping... tools/support/typos-h
+build	Setup Android SDK	2025-10-15T01:50:22.4468455Z [=======================================] 100% Unzipping... tools/support/typos-
+build	Setup Android SDK	2025-10-15T01:50:22.4508896Z 
+build	Setup Android SDK	2025-10-15T01:50:22.4739102Z [command]/usr/local/lib/android/sdk/cmdline-tools/16.0/bin/sdkmanager platform-tools
+build	Setup Android SDK	2025-10-15T01:50:23.1730520Z Loading package information...                                                  
+build	Setup Android SDK	2025-10-15T01:50:23.2595029Z Loading local repository...                                                     
+build	Setup Android SDK	2025-10-15T01:50:23.2598827Z [                                       ] 3% Loading local repository...        
+build	Setup Android SDK	2025-10-15T01:50:23.2694596Z [                                       ] 3% Fetch remote repository...         
+build	Setup Android SDK	2025-10-15T01:50:23.6067422Z [=                                      ] 3% Fetch remote repository...         
+build	Setup Android SDK	2025-10-15T01:50:23.7745729Z [=                                      ] 4% Fetch remote repository...         
+build	Setup Android SDK	2025-10-15T01:50:23.7965155Z [=                                      ] 5% Fetch remote repository...         
+build	Setup Android SDK	2025-10-15T01:50:23.8368235Z [==                                     ] 5% Fetch remote repository...         
+build	Setup Android SDK	2025-10-15T01:50:23.9465279Z [==                                     ] 6% Fetch remote repository...         
+build	Setup Android SDK	2025-10-15T01:50:24.0224206Z [==                                     ] 7% Fetch remote repository...         
+build	Setup Android SDK	2025-10-15T01:50:24.0224887Z [==                                     ] 7% Computing updates...               
+build	Setup Android SDK	2025-10-15T01:50:24.0348526Z [===                                    ] 8% Computing updates...               
+build	Setup Android SDK	2025-10-15T01:50:24.0406693Z [===                                    ] 10% Computing updates...              
+build	Setup Android SDK	2025-10-15T01:50:24.0411083Z [=======================================] 100% Computing updates...             
+build	Setup Android SDK	2025-10-15T01:50:24.0413368Z 
+build	Install required SDK components	﻿2025-10-15T01:50:24.0750382Z ##[group]Run sdkmanager --install "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+build	Install required SDK components	2025-10-15T01:50:24.0751067Z [36;1msdkmanager --install "platform-tools" "platforms;android-34" "build-tools;34.0.0"[0m
+build	Install required SDK components	2025-10-15T01:50:24.0751561Z [36;1m# pipefail 환경에서 yes 쪽이 SIGPIPE로 비정상 종료하지 않도록 || true[0m
+build	Install required SDK components	2025-10-15T01:50:24.0751909Z [36;1myes | sdkmanager --licenses > /dev/null || true[0m
+build	Install required SDK components	2025-10-15T01:50:24.0787837Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+build	Install required SDK components	2025-10-15T01:50:24.0788159Z env:
+build	Install required SDK components	2025-10-15T01:50:24.0788470Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+build	Install required SDK components	2025-10-15T01:50:24.0788914Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+build	Install required SDK components	2025-10-15T01:50:24.0789291Z   ANDROID_HOME: /usr/local/lib/android/sdk
+build	Install required SDK components	2025-10-15T01:50:24.0789608Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+build	Install required SDK components	2025-10-15T01:50:24.0789845Z ##[endgroup]
+build	Install required SDK components	2025-10-15T01:50:24.8332876Z Loading package information...                                                  
+build	Install required SDK components	2025-10-15T01:50:24.9216192Z Loading local repository...                                                     
+build	Install required SDK components	2025-10-15T01:50:24.9220110Z [                                       ] 3% Loading local repository...        
+build	Install required SDK components	2025-10-15T01:50:24.9306747Z [                                       ] 3% Fetch remote repository...         
+build	Install required SDK components	2025-10-15T01:50:25.1630052Z [=                                      ] 3% Fetch remote repository...         
+build	Install required SDK components	2025-10-15T01:50:25.2572422Z [=                                      ] 4% Fetch remote repository...         
+build	Install required SDK components	2025-10-15T01:50:25.2745237Z [=                                      ] 5% Fetch remote repository...         
+build	Install required SDK components	2025-10-15T01:50:25.3034480Z [==                                     ] 5% Fetch remote repository...         
+build	Install required SDK components	2025-10-15T01:50:25.3712273Z [==                                     ] 6% Fetch remote repository...         
+build	Install required SDK components	2025-10-15T01:50:25.4205858Z [==                                     ] 7% Fetch remote repository...         
+build	Install required SDK components	2025-10-15T01:50:25.4213759Z [==                                     ] 7% Computing updates...               
+build	Install required SDK components	2025-10-15T01:50:25.4337279Z [===                                    ] 8% Computing updates...               
+build	Install required SDK components	2025-10-15T01:50:25.4389169Z [===                                    ] 10% Computing updates...              
+build	Install required SDK components	2025-10-15T01:50:25.4393309Z [=======================================] 100% Computing updates...             
+build	Install required SDK components	2025-10-15T01:50:25.4395308Z 
+build	Install required SDK components	2025-10-15T01:50:27.0522971Z yes: standard output: Broken pipe
+build	Setup Gradle (download specific version)	﻿2025-10-15T01:50:27.0629428Z ##[group]Run gradle/gradle-build-action@v2
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.0629734Z with:
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.0629911Z   gradle-version: 8.8
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.0630101Z   cache-disabled: false
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.0630301Z   cache-read-only: true
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.0630492Z   cache-write-only: false
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.0630706Z   cache-overwrite-existing: false
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.0630980Z   gradle-home-cache-includes: caches
 build	Setup Gradle (download specific version)	notifications
 build	Setup Gradle (download specific version)	
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.1491295Z   gradle-home-cache-cleanup: false
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.1491533Z   generate-job-summary: true
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.1491745Z   dependency-graph: disabled
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.1491969Z   gradle-home-cache-strict-match: false
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.1492209Z   workflow-job-context: null
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.1492715Z   github-token: ***
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.1492892Z env:
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.1493144Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.1493575Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.1493955Z   ANDROID_HOME: /usr/local/lib/android/sdk
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.1494238Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.1494477Z ##[endgroup]
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.3460203Z ##[group]Restore Gradle state from cache
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.5259637Z ##[warning]Failed to restore v8-gradle|Linux|android ci-build[37a6259cc0c1dae299a7866489dff0bd]-60bb0ccb5e5122c91ac5ccaa94556c4097b0557e: Error: Cache service responded with 400
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.5289121Z Gradle User Home cache not found. Will initialize empty.
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.5289885Z ##[endgroup]
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.6118611Z ##[group]Provision Gradle 8.8
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.6281297Z ##[warning]Restore Gradle distribution 8.8 failed: Error: Cache service responded with 400
-build	Setup Gradle (download specific version)	2025-10-14T04:15:55.6283082Z Gradle distribution 8.8 not found in cache. Will download.
-build	Setup Gradle (download specific version)	2025-10-14T04:15:56.4134602Z Downloaded https://services.gradle.org/distributions/gradle-8.8-bin.zip to /home/runner/gradle-installations/downloads/gradle-8.8-bin.zip (size 138039528)
-build	Setup Gradle (download specific version)	2025-10-14T04:15:56.4261963Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/hello-android/hello-android --files-from manifest.txt --use-compress-program zstdmt
-build	Setup Gradle (download specific version)	2025-10-14T04:15:56.6124266Z ##[warning]Save Gradle distribution 8.8 failed: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>0fM7taAAAAAAFQFCyXQZ+TbWBjRWOtokFUEhMMzBFREdFMDExMgBFZGdl
-build	Setup Gradle (download specific version)	2025-10-14T04:15:56.6140010Z [command]/usr/bin/unzip -o -q /home/runner/gradle-installations/downloads/gradle-8.8-bin.zip
-build	Setup Gradle (download specific version)	2025-10-14T04:15:57.6291908Z Extracted Gradle 8.8 to /home/runner/gradle-installations/installs/gradle-8.8
-build	Setup Gradle (download specific version)	2025-10-14T04:15:57.6294246Z Provisioned Gradle executable /home/runner/gradle-installations/installs/gradle-8.8/bin/gradle
-build	Setup Gradle (download specific version)	2025-10-14T04:15:57.6295690Z ##[endgroup]
-build	Build debug APK	﻿2025-10-14T04:15:57.6464411Z ##[group]Run gradle --version
-build	Build debug APK	2025-10-14T04:15:57.6464683Z [36;1mgradle --version[0m
-build	Build debug APK	2025-10-14T04:15:57.6464901Z [36;1mgradle :app:assembleDebug[0m
-build	Build debug APK	2025-10-14T04:15:57.6497509Z shell: /usr/bin/bash -e {0}
-build	Build debug APK	2025-10-14T04:15:57.6497724Z env:
-build	Build debug APK	2025-10-14T04:15:57.6497991Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
-build	Build debug APK	2025-10-14T04:15:57.6498432Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
-build	Build debug APK	2025-10-14T04:15:57.6498778Z   ANDROID_HOME: /usr/local/lib/android/sdk
-build	Build debug APK	2025-10-14T04:15:57.6499031Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
-build	Build debug APK	2025-10-14T04:15:57.6499289Z   GRADLE_BUILD_ACTION_SETUP_COMPLETED: true
-build	Build debug APK	2025-10-14T04:15:57.6499533Z   GRADLE_BUILD_ACTION_CACHE_RESTORED: true
-build	Build debug APK	2025-10-14T04:15:57.6499755Z ##[endgroup]
-build	Build debug APK	2025-10-14T04:15:58.2114944Z 
-build	Build debug APK	2025-10-14T04:15:58.2135420Z Welcome to Gradle 8.8!
-build	Build debug APK	2025-10-14T04:15:58.2135719Z 
-build	Build debug APK	2025-10-14T04:15:58.2136006Z Here are the highlights of this release:
-build	Build debug APK	2025-10-14T04:15:58.2136525Z  - Running Gradle on Java 22
-build	Build debug APK	2025-10-14T04:15:58.2137085Z  - Configurable Gradle daemon JVM
-build	Build debug APK	2025-10-14T04:15:58.2137633Z  - Improved IDE performance for large projects
-build	Build debug APK	2025-10-14T04:15:58.2137976Z 
-build	Build debug APK	2025-10-14T04:15:58.2138420Z For more details see https://docs.gradle.org/8.8/release-notes.html
-build	Build debug APK	2025-10-14T04:15:58.2138865Z 
-build	Build debug APK	2025-10-14T04:15:58.2138878Z 
-build	Build debug APK	2025-10-14T04:15:58.2139190Z ------------------------------------------------------------
-build	Build debug APK	2025-10-14T04:15:58.2139642Z Gradle 8.8
-build	Build debug APK	2025-10-14T04:15:58.2140100Z ------------------------------------------------------------
-build	Build debug APK	2025-10-14T04:15:58.2140444Z 
-build	Build debug APK	2025-10-14T04:15:58.2140684Z Build time:   2024-05-31 21:46:56 UTC
-build	Build debug APK	2025-10-14T04:15:58.2141281Z Revision:     4bd1b3d3fc3f31db5a26eecb416a165b8cc36082
-build	Build debug APK	2025-10-14T04:15:58.2141645Z 
-build	Build debug APK	2025-10-14T04:15:58.2141821Z Kotlin:       1.9.22
-build	Build debug APK	2025-10-14T04:15:58.2142185Z Groovy:       3.0.21
-build	Build debug APK	2025-10-14T04:15:58.2142983Z Ant:          Apache Ant(TM) version 1.10.13 compiled on January 4 2023
-build	Build debug APK	2025-10-14T04:15:58.2143652Z JVM:          17.0.16 (Eclipse Adoptium 17.0.16+8)
-build	Build debug APK	2025-10-14T04:15:58.2144206Z OS:           Linux 6.11.0-1018-azure amd64
-build	Build debug APK	2025-10-14T04:15:58.2144490Z 
-build	Build debug APK	2025-10-14T04:15:59.0250829Z Starting a Gradle Daemon (subsequent builds will be faster)
-build	Build debug APK	2025-10-14T04:16:57.9275807Z > Task :app:preBuild UP-TO-DATE
-build	Build debug APK	2025-10-14T04:16:57.9276759Z > Task :app:preDebugBuild UP-TO-DATE
-build	Build debug APK	2025-10-14T04:16:57.9277413Z > Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
-build	Build debug APK	2025-10-14T04:16:57.9278116Z > Task :app:checkKotlinGradlePluginConfigurationErrors
-build	Build debug APK	2025-10-14T04:17:04.5264417Z > Task :app:generateDebugResValues
-build	Build debug APK	2025-10-14T04:17:04.5270985Z > Task :app:dataBindingMergeDependencyArtifactsDebug
-build	Build debug APK	2025-10-14T04:17:04.5279828Z > Task :app:generateDebugResources
-build	Build debug APK	2025-10-14T04:17:06.0244551Z > Task :app:packageDebugResources
-build	Build debug APK	2025-10-14T04:17:07.2244217Z > Task :app:mergeDebugResources
-build	Build debug APK	2025-10-14T04:17:07.6270139Z > Task :app:parseDebugLocalResources
-build	Build debug APK	2025-10-14T04:17:07.7266301Z > Task :app:checkDebugAarMetadata
-build	Build debug APK	2025-10-14T04:17:07.9287129Z > Task :app:dataBindingGenBaseClassesDebug
-build	Build debug APK	2025-10-14T04:17:07.9288325Z > Task :app:mapDebugSourceSetPaths
-build	Build debug APK	2025-10-14T04:17:07.9289280Z > Task :app:createDebugCompatibleScreenManifests
-build	Build debug APK	2025-10-14T04:17:07.9290286Z > Task :app:extractDeepLinksDebug
-build	Build debug APK	2025-10-14T04:17:08.2244551Z 
-build	Build debug APK	2025-10-14T04:17:08.2250063Z > Task :app:processDebugMainManifest
-build	Build debug APK	2025-10-14T04:17:08.2256378Z package="com.kingjjy.hello" found in source AndroidManifest.xml: /home/runner/work/hello-android/hello-android/app/src/main/AndroidManifest.xml.
-build	Build debug APK	2025-10-14T04:17:08.2259868Z Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
-build	Build debug APK	2025-10-14T04:17:08.2265028Z Recommendation: remove package="com.kingjjy.hello" from the source AndroidManifest.xml: /home/runner/work/hello-android/hello-android/app/src/main/AndroidManifest.xml.
-build	Build debug APK	2025-10-14T04:17:08.2266101Z 
-build	Build debug APK	2025-10-14T04:17:08.2266346Z > Task :app:processDebugManifest
-build	Build debug APK	2025-10-14T04:17:08.3244751Z > Task :app:javaPreCompileDebug
-build	Build debug APK	2025-10-14T04:17:08.3248404Z > Task :app:mergeDebugShaders
-build	Build debug APK	2025-10-14T04:17:08.3248984Z > Task :app:compileDebugShaders NO-SOURCE
-build	Build debug APK	2025-10-14T04:17:08.3249609Z > Task :app:generateDebugAssets UP-TO-DATE
-build	Build debug APK	2025-10-14T04:17:08.4250869Z > Task :app:mergeDebugAssets
-build	Build debug APK	2025-10-14T04:17:08.4281080Z > Task :app:compressDebugAssets
-build	Build debug APK	2025-10-14T04:17:08.4281809Z > Task :app:desugarDebugFileDependencies
-build	Build debug APK	2025-10-14T04:17:09.9243391Z > Task :app:mergeDebugJniLibFolders
-build	Build debug APK	2025-10-14T04:17:09.9247782Z > Task :app:processDebugManifestForPackage
-build	Build debug APK	2025-10-14T04:17:09.9251833Z > Task :app:checkDebugDuplicateClasses
-build	Build debug APK	2025-10-14T04:17:28.1244037Z > Task :app:processDebugResources FAILED
-build	Build debug APK	2025-10-14T04:17:38.6243505Z > Task :app:mergeExtDexDebug
-build	Build debug APK	2025-10-14T04:17:38.7265711Z 
-build	Build debug APK	2025-10-14T04:17:38.7273691Z FAILURE: Build failed with an exception.
-build	Build debug APK	2025-10-14T04:17:38.7289946Z 
-build	Build debug APK	2025-10-14T04:17:38.7290174Z * What went wrong:
-build	Build debug APK	2025-10-14T04:17:38.7290722Z Execution failed for task ':app:processDebugResources'.
-build	Build debug APK	2025-10-14T04:17:38.7292079Z > A failure occurred while executing com.android.build.gradle.internal.res.LinkApplicationAndroidResourcesTask$TaskAction
-build	Build debug APK	2025-10-14T04:17:38.7293391Z    > Android resource linking failed
-build	Build debug APK	2025-10-14T04:17:38.7295103Z      ERROR: /home/runner/work/hello-android/hello-android/app/src/main/AndroidManifest.xml:5:5-21:19: AAPT: error: resource mipmap/ic_launcher (aka com.kingjjy.hello:mipmap/ic_launcher) not found.
-build	Build debug APK	2025-10-14T04:17:38.7298841Z          
-build	Build debug APK	2025-10-14T04:17:38.7300552Z      ERROR: /home/runner/work/hello-android/hello-android/app/src/main/AndroidManifest.xml:5:5-21:19: AAPT: error: resource mipmap/ic_launcher_round (aka com.kingjjy.hello:mipmap/ic_launcher_round) not found.
-build	Build debug APK	2025-10-14T04:17:38.7301880Z          
-build	Build debug APK	2025-10-14T04:17:38.7302065Z 
-build	Build debug APK	2025-10-14T04:17:38.7302175Z * Try:
-build	Build debug APK	2025-10-14T04:17:38.7302846Z > Run with --stacktrace option to get the stack trace.
-build	Build debug APK	2025-10-14T04:17:38.7303525Z > Run with --info or --debug option to get more log output.
-build	Build debug APK	2025-10-14T04:17:38.7304127Z > Run with --scan to get full insights.
-build	Build debug APK	2025-10-14T04:17:38.7304714Z > Get more help at https://help.gradle.org.
-build	Build debug APK	2025-10-14T04:17:38.7305044Z 
-build	Build debug APK	2025-10-14T04:17:38.7305245Z BUILD FAILED in 1m 40s
-build	Build debug APK	2025-10-14T04:17:38.7305789Z 24 actionable tasks: 24 executed
-build	Build debug APK	2025-10-14T04:17:39.1623470Z ##[error]Process completed with exit code 1.
-build	Post Setup Gradle (download specific version)	﻿2025-10-14T04:17:39.1684495Z Post job cleanup.
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:39.3255930Z In final post-action step, saving state and writing summary
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:39.3264097Z Stopping all Gradle daemons before saving Gradle User Home state
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:39.3266009Z Stopping Gradle daemons for /home/runner/gradle-installations/installs/gradle-8.8
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:39.3284790Z [command]/home/runner/gradle-installations/installs/gradle-8.8/bin/gradle --stop
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:40.2191432Z Stopping Daemon(s)
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:40.2192069Z 1 Daemon stopped
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:40.2322221Z ##[group]Caching Gradle state
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:40.2432680Z Caching generated-gradle-jars with path '/home/runner/.gradle/caches/8.8/generated-gradle-jars/gradle-api-8.8.jar' and cache key: generated-gradle-jars-8b02b97fb417a75a34543e345c4e56f3
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:40.2616916Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/hello-android/hello-android --files-from manifest.txt --use-compress-program zstdmt
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:40.5788821Z Caching dependencies with path '/home/runner/.gradle/caches/modules-*/files-*/*/*/*/*' and cache key: dependencies-d9d741075fb20d52cbc28d5689b1da60
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:40.5915935Z Caching instrumented-jars with path '/home/runner/.gradle/caches/jars-*/*' and cache key: instrumented-jars-07938f8f2ef7fc8fb6692a315999a95a
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:40.6141082Z Caching kotlin-dsl with path '/home/runner/.gradle/caches/*/kotlin-dsl/*/*' and cache key: kotlin-dsl-6c370ddc9650ef4afc80f3c43d4a2f84
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:40.6331637Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/hello-android/hello-android --files-from manifest.txt --use-compress-program zstdmt
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:40.7188203Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/hello-android/hello-android --files-from manifest.txt --use-compress-program zstdmt
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:40.7776487Z ##[warning]Failed to save cache entry with path '/home/runner/.gradle/caches/jars-*/*,zstd-without-long,1.0' and key: instrumented-jars-07938f8f2ef7fc8fb6692a315999a95a: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>05M7taAAAAAA8LfvB/ZZDQZi9QLn9ODXaUEhMMzBFREdFMDExMgBFZGdl
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:40.8174762Z ##[warning]Failed to save cache entry with path '/home/runner/.gradle/caches/8.8/generated-gradle-jars/gradle-api-8.8.jar,zstd-without-long,1.0' and key: generated-gradle-jars-8b02b97fb417a75a34543e345c4e56f3: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>05M7taAAAAACky5x2lpFWR5YR275UqPXnUEhMMzBFREdFMDExMgBFZGdl
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:40.8620110Z ##[warning]Failed to save cache entry with path '/home/runner/.gradle/caches/*/kotlin-dsl/*/*,zstd-without-long,1.0' and key: kotlin-dsl-6c370ddc9650ef4afc80f3c43d4a2f84: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>05M7taAAAAACWh+ObHrtqRpC6a3YacZKNUEhMMzBFREdFMDIxNwBFZGdl
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:41.0818521Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/hello-android/hello-android --files-from manifest.txt --use-compress-program zstdmt
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:41.6443199Z ##[warning]Failed to save cache entry with path '/home/runner/.gradle/caches/modules-*/files-*/*/*/*/*,zstd-without-long,1.0' and key: dependencies-d9d741075fb20d52cbc28d5689b1da60: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>05c7taAAAAAADDYDzQBrxTpwJCbk63VogUEhMMzBFREdFMDIxNwBFZGdl
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:41.7500424Z Caching Gradle User Home with cache key: v8-gradle|Linux|android ci-build[37a6259cc0c1dae299a7866489dff0bd]-60bb0ccb5e5122c91ac5ccaa94556c4097b0557e
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:41.7578973Z [command]/usr/bin/tar --posix -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/hello-android/hello-android --files-from manifest.txt --use-compress-program zstdmt
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:43.0366494Z ##[warning]Failed to save cache entry with path '/home/runner/.gradle/caches,/home/runner/.gradle/notifications,/home/runner/.gradle/.gradle-build-action,zstd-without-long,1.0' and key: v8-gradle|Linux|android ci-build[37a6259cc0c1dae299a7866489dff0bd]-60bb0ccb5e5122c91ac5ccaa94556c4097b0557e: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>0587taAAAAAD4d/cSfSIVS61NTtzKgQvwUEhMMzBFREdFMDIxNwBFZGdl
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:43.0371515Z ##[endgroup]
-build	Post Setup Gradle (download specific version)	2025-10-14T04:17:43.0372003Z Writing job summary
-build	Post Setup Java 17	﻿2025-10-14T04:17:43.0557680Z Post job cleanup.
-build	Post Checkout	﻿2025-10-14T04:17:43.2268866Z Post job cleanup.
-build	Post Checkout	2025-10-14T04:17:43.3231975Z [command]/usr/bin/git version
-build	Post Checkout	2025-10-14T04:17:43.3273350Z git version 2.51.0
-build	Post Checkout	2025-10-14T04:17:43.3316199Z Temporarily overriding HOME='/home/runner/work/_temp/58a0f382-3702-43b5-a141-a3fdd8046c7c' before making global git config changes
-build	Post Checkout	2025-10-14T04:17:43.3317665Z Adding repository directory to the temporary git global config as a safe directory
-build	Post Checkout	2025-10-14T04:17:43.3322563Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/hello-android/hello-android
-build	Post Checkout	2025-10-14T04:17:43.3363473Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
-build	Post Checkout	2025-10-14T04:17:43.3396008Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
-build	Post Checkout	2025-10-14T04:17:43.3619689Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
-build	Post Checkout	2025-10-14T04:17:43.3640566Z http.https://github.com/.extraheader
-build	Post Checkout	2025-10-14T04:17:43.3653388Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
-build	Post Checkout	2025-10-14T04:17:43.3684002Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
-build	Complete job	﻿2025-10-14T04:17:43.3998845Z Cleaning up orphan processes
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.0631277Z   gradle-home-cache-cleanup: false
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.0631519Z   generate-job-summary: true
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.0631736Z   dependency-graph: disabled
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.0631966Z   gradle-home-cache-strict-match: false
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.0632211Z   workflow-job-context: null
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.0632539Z   github-token: ***
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.0632938Z env:
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.0633206Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.0633653Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.0634061Z   ANDROID_HOME: /usr/local/lib/android/sdk
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.0634328Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.0634564Z ##[endgroup]
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.2633627Z ##[group]Restore Gradle state from cache
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.4826865Z ##[warning]Failed to restore v8-gradle|Linux|android ci-build[37a6259cc0c1dae299a7866489dff0bd]-002d7dd12e576debb995fd6589a96da06993c7a2: Error: Cache service responded with 400
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.4864891Z Gradle User Home cache not found. Will initialize empty.
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.4865711Z ##[endgroup]
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.6339981Z ##[group]Provision Gradle 8.8
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.6428961Z ##[warning]Restore Gradle distribution 8.8 failed: Error: Cache service responded with 400
+build	Setup Gradle (download specific version)	2025-10-15T01:50:27.6431074Z Gradle distribution 8.8 not found in cache. Will download.
+build	Setup Gradle (download specific version)	2025-10-15T01:50:28.6249315Z Downloaded https://services.gradle.org/distributions/gradle-8.8-bin.zip to /home/runner/gradle-installations/downloads/gradle-8.8-bin.zip (size 138039528)
+build	Setup Gradle (download specific version)	2025-10-15T01:50:28.6282603Z [command]/usr/bin/unzip -o -q /home/runner/gradle-installations/downloads/gradle-8.8-bin.zip
+build	Setup Gradle (download specific version)	2025-10-15T01:50:29.6488242Z Extracted Gradle 8.8 to /home/runner/gradle-installations/installs/gradle-8.8
+build	Setup Gradle (download specific version)	2025-10-15T01:50:29.6489386Z Provisioned Gradle executable /home/runner/gradle-installations/installs/gradle-8.8/bin/gradle
+build	Setup Gradle (download specific version)	2025-10-15T01:50:29.6490788Z ##[endgroup]
+build	Build debug APK	﻿2025-10-15T01:50:29.6636324Z ##[group]Run gradle --version
+build	Build debug APK	2025-10-15T01:50:29.6636603Z [36;1mgradle --version[0m
+build	Build debug APK	2025-10-15T01:50:29.6636822Z [36;1mgradle :app:assembleDebug[0m
+build	Build debug APK	2025-10-15T01:50:29.6671676Z shell: /usr/bin/bash -e {0}
+build	Build debug APK	2025-10-15T01:50:29.6671901Z env:
+build	Build debug APK	2025-10-15T01:50:29.6672175Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+build	Build debug APK	2025-10-15T01:50:29.6672630Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+build	Build debug APK	2025-10-15T01:50:29.6673151Z   ANDROID_HOME: /usr/local/lib/android/sdk
+build	Build debug APK	2025-10-15T01:50:29.6673419Z   ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+build	Build debug APK	2025-10-15T01:50:29.6673855Z   GRADLE_BUILD_ACTION_SETUP_COMPLETED: true
+build	Build debug APK	2025-10-15T01:50:29.6674108Z   GRADLE_BUILD_ACTION_CACHE_RESTORED: true
+build	Build debug APK	2025-10-15T01:50:29.6674340Z ##[endgroup]
+build	Build debug APK	2025-10-15T01:50:30.1725147Z 
+build	Build debug APK	2025-10-15T01:50:30.1737032Z Welcome to Gradle 8.8!
+build	Build debug APK	2025-10-15T01:50:30.1737335Z 
+build	Build debug APK	2025-10-15T01:50:30.1737610Z Here are the highlights of this release:
+build	Build debug APK	2025-10-15T01:50:30.1738139Z  - Running Gradle on Java 22
+build	Build debug APK	2025-10-15T01:50:30.1738694Z  - Configurable Gradle daemon JVM
+build	Build debug APK	2025-10-15T01:50:30.1739251Z  - Improved IDE performance for large projects
+build	Build debug APK	2025-10-15T01:50:30.1739602Z 
+build	Build debug APK	2025-10-15T01:50:30.1740080Z For more details see https://docs.gradle.org/8.8/release-notes.html
+build	Build debug APK	2025-10-15T01:50:30.1740551Z 
+build	Build debug APK	2025-10-15T01:50:30.1740566Z 
+build	Build debug APK	2025-10-15T01:50:30.1740887Z ------------------------------------------------------------
+build	Build debug APK	2025-10-15T01:50:30.1741376Z Gradle 8.8
+build	Build debug APK	2025-10-15T01:50:30.1741864Z ------------------------------------------------------------
+build	Build debug APK	2025-10-15T01:50:30.1742241Z 
+build	Build debug APK	2025-10-15T01:50:30.1742506Z Build time:   2024-05-31 21:46:56 UTC
+build	Build debug APK	2025-10-15T01:50:30.1745095Z Revision:     4bd1b3d3fc3f31db5a26eecb416a165b8cc36082
+build	Build debug APK	2025-10-15T01:50:30.1745501Z 
+build	Build debug APK	2025-10-15T01:50:30.1745703Z Kotlin:       1.9.22
+build	Build debug APK	2025-10-15T01:50:30.1746111Z Groovy:       3.0.21
+build	Build debug APK	2025-10-15T01:50:30.1746749Z Ant:          Apache Ant(TM) version 1.10.13 compiled on January 4 2023
+build	Build debug APK	2025-10-15T01:50:30.1747487Z JVM:          17.0.16 (Eclipse Adoptium 17.0.16+8)
+build	Build debug APK	2025-10-15T01:50:30.1748081Z OS:           Linux 6.11.0-1018-azure amd64
+build	Build debug APK	2025-10-15T01:50:30.1748376Z 
+build	Build debug APK	2025-10-15T01:50:30.7637706Z Starting a Gradle Daemon (subsequent builds will be faster)
+build	Build debug APK	2025-10-15T01:51:35.0664533Z > Task :app:preBuild UP-TO-DATE
+build	Build debug APK	2025-10-15T01:51:35.1633222Z > Task :app:preDebugBuild UP-TO-DATE
+build	Build debug APK	2025-10-15T01:51:35.1637648Z > Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+build	Build debug APK	2025-10-15T01:51:35.1638670Z > Task :app:checkKotlinGradlePluginConfigurationErrors
+build	Build debug APK	2025-10-15T01:52:03.6649035Z > Task :app:generateDebugResValues
+build	Build debug APK	2025-10-15T01:52:03.6649911Z > Task :app:checkDebugAarMetadata
+build	Build debug APK	2025-10-15T01:52:03.7637127Z > Task :app:mapDebugSourceSetPaths
+build	Build debug APK	2025-10-15T01:52:03.7641412Z > Task :app:generateDebugResources
+build	Build debug APK	2025-10-15T01:52:05.1629653Z > Task :app:packageDebugResources
+build	Build debug APK	2025-10-15T01:52:05.7629156Z > Task :app:mergeDebugResources
+build	Build debug APK	2025-10-15T01:52:06.0630339Z > Task :app:createDebugCompatibleScreenManifests
+build	Build debug APK	2025-10-15T01:52:06.0643745Z > Task :app:extractDeepLinksDebug
+build	Build debug APK	2025-10-15T01:52:06.0644766Z > Task :app:parseDebugLocalResources
+build	Build debug APK	2025-10-15T01:52:06.2647117Z > Task :app:processDebugMainManifest
+build	Build debug APK	2025-10-15T01:52:06.3628601Z > Task :app:processDebugManifest
+build	Build debug APK	2025-10-15T01:52:06.3631197Z > Task :app:processDebugManifestForPackage
+build	Build debug APK	2025-10-15T01:52:06.3635835Z > Task :app:javaPreCompileDebug
+build	Build debug APK	2025-10-15T01:52:07.2653980Z > Task :app:mergeDebugShaders
+build	Build debug APK	2025-10-15T01:52:07.2654647Z > Task :app:compileDebugShaders NO-SOURCE
+build	Build debug APK	2025-10-15T01:52:07.2655394Z > Task :app:generateDebugAssets UP-TO-DATE
+build	Build debug APK	2025-10-15T01:52:07.3629169Z > Task :app:mergeDebugAssets
+build	Build debug APK	2025-10-15T01:52:07.3644665Z > Task :app:compressDebugAssets
+build	Build debug APK	2025-10-15T01:52:07.5628883Z > Task :app:processDebugResources FAILED
+build	Build debug APK	2025-10-15T01:52:09.6645855Z > Task :app:checkDebugDuplicateClasses
+build	Build debug APK	2025-10-15T01:52:09.6649912Z 
+build	Build debug APK	2025-10-15T01:52:09.6650265Z FAILURE: Build failed with an exception.
+build	Build debug APK	2025-10-15T01:52:09.6650590Z 
+build	Build debug APK	2025-10-15T01:52:09.6650765Z * What went wrong:
+build	Build debug APK	2025-10-15T01:52:09.6651317Z Execution failed for task ':app:processDebugResources'.
+build	Build debug APK	2025-10-15T01:52:09.6653368Z > A failure occurred while executing com.android.build.gradle.internal.res.LinkApplicationAndroidResourcesTask$TaskAction
+build	Build debug APK	2025-10-15T01:52:09.6666494Z    > Android resource linking failed
+build	Build debug APK	2025-10-15T01:52:09.6667016Z 19 actionable tasks: 19 executed
+build	Build debug APK	2025-10-15T01:52:09.6678394Z      com.example.helloandroid.app-mergeDebugResources-43:/values/values.xml:232: error: resource attr/colorPrimaryVariant (aka com.example.helloandroid:attr/colorPrimaryVariant) not found.
+build	Build debug APK	2025-10-15T01:52:09.6680713Z      error: resource style/Theme.MaterialComponents.DayNight.NoActionBar (aka com.example.helloandroid:style/Theme.MaterialComponents.DayNight.NoActionBar) not found.
+build	Build debug APK	2025-10-15T01:52:09.6683485Z      com.example.helloandroid.app-mergeDebugResources-43:/values/values.xml:232: error: resource attr/colorPrimaryVariant (aka com.example.helloandroid:attr/colorPrimaryVariant) not found.
+build	Build debug APK	2025-10-15T01:52:09.6684791Z      error: failed linking references.
+build	Build debug APK	2025-10-15T01:52:09.6685073Z 
+build	Build debug APK	2025-10-15T01:52:09.6685085Z 
+build	Build debug APK	2025-10-15T01:52:09.6685191Z * Try:
+build	Build debug APK	2025-10-15T01:52:09.6685637Z > Run with --stacktrace option to get the stack trace.
+build	Build debug APK	2025-10-15T01:52:09.6686293Z > Run with --info or --debug option to get more log output.
+build	Build debug APK	2025-10-15T01:52:09.6686853Z > Run with --scan to get full insights.
+build	Build debug APK	2025-10-15T01:52:09.6687372Z > Get more help at https://help.gradle.org.
+build	Build debug APK	2025-10-15T01:52:09.6687661Z 
+build	Build debug APK	2025-10-15T01:52:09.6687834Z BUILD FAILED in 1m 39s
+build	Build debug APK	2025-10-15T01:52:10.1371784Z ##[error]Process completed with exit code 1.
+build	Post Setup Gradle (download specific version)	﻿2025-10-15T01:52:10.1463097Z Post job cleanup.
+build	Post Setup Gradle (download specific version)	2025-10-15T01:52:10.3848870Z In final post-action step, saving state and writing summary
+build	Post Setup Gradle (download specific version)	2025-10-15T01:52:10.3859772Z Cache is read-only: will not save state for use in subsequent builds.
+build	Post Setup Gradle (download specific version)	2025-10-15T01:52:10.3862947Z Writing job summary
+build	Post Setup Java 17	﻿2025-10-15T01:52:10.4064728Z Post job cleanup.
+build	Post Checkout	﻿2025-10-15T01:52:10.6141059Z Post job cleanup.
+build	Post Checkout	2025-10-15T01:52:10.7063950Z [command]/usr/bin/git version
+build	Post Checkout	2025-10-15T01:52:10.7103391Z git version 2.51.0
+build	Post Checkout	2025-10-15T01:52:10.7147193Z Temporarily overriding HOME='/home/runner/work/_temp/42cf086c-25f3-4d42-808b-edcb5df0ccad' before making global git config changes
+build	Post Checkout	2025-10-15T01:52:10.7148715Z Adding repository directory to the temporary git global config as a safe directory
+build	Post Checkout	2025-10-15T01:52:10.7161362Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/hello-android/hello-android
+build	Post Checkout	2025-10-15T01:52:10.7197036Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+build	Post Checkout	2025-10-15T01:52:10.7230957Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+build	Post Checkout	2025-10-15T01:52:10.7482010Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+build	Post Checkout	2025-10-15T01:52:10.7506109Z http.https://github.com/.extraheader
+build	Post Checkout	2025-10-15T01:52:10.7523737Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+build	Post Checkout	2025-10-15T01:52:10.7558788Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+build	Complete job	﻿2025-10-15T01:52:10.7913435Z Cleaning up orphan processes
+build	Complete job	2025-10-15T01:52:10.8178395Z Terminate orphan process: pid (2583) (java)
