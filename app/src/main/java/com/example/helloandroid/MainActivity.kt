@@ -1,72 +1,59 @@
 package com.example.helloandroid
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
-import androidx.activity.ComponentActivity
+import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
 
-    companion object {
-        // 👉 실제 원하는 목적지 URL로 바꿔도 됩니다.
-        private const val URL_EARN_POINT   = "https://m.h-point.co.kr/app/earn"       // 포인트 모으기
-        private const val URL_CONVERT_MILE = "https://m.h-point.co.kr/app/convert"    // 마일리지 전환
-    }
+    // 🔗 여기에 "정확히 원하는 목적지" URL을 넣어주세요 (HTTPS)
+    private val EARN_HTTPS_URL = "https://PUT_EARN_URL_HERE"
+    private val CONVERT_HTTPS_URL = "https://PUT_CONVERT_URL_HERE"
+
+    // 🔗 H.Point 앱 딥링크 예시 (실제 스킴/패스는 사용하던 값으로 교체)
+    // 예: "hpointapp://earn" 또는 "hpointapp://convert" 형태라면 아래 교체
+    private val EARN_APP_DEEPLINK = "hpointapp://earn"
+    private val CONVERT_APP_DEEPLINK = "hpointapp://convert"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // 레이아웃 파일명이 다르면 여기만 수정
         setContentView(R.layout.activity_main)
 
-        // 레이아웃에 존재할 법한 여러 후보 ID를 순회해 첫 번째로 발견되는 버튼을 사용
-        val btnEarn = findButton(
-            "btnEarnPoint", "btn_earn_point", "btnEarn", "buttonEarnPoint", "earnButton"
-        )
-        val btnConvert = findButton(
-            "btnConvertToMileage", "btn_convert_to_mileage", "btnConvert", "buttonConvertToMileage", "convertButton"
-        )
+        val btnEarn = findViewById<Button>(R.id.btnEarnPoint)
+        val btnConvert = findViewById<Button>(R.id.btnConvertToMileage)
 
-        if (btnEarn == null) {
-            Toast.makeText(this, "포인트 모으기 버튼 ID를 찾지 못했습니다.", Toast.LENGTH_SHORT).show()
-        } else {
-            btnEarn.setOnClickListener {
-                openInAppWeb("포인트 모으기", URL_EARN_POINT)
-            }
+        btnEarn.setOnClickListener {
+            openHPointPreferApp(
+                appLink = EARN_APP_DEEPLINK,
+                httpsFallback = EARN_HTTPS_URL
+            )
         }
 
-        if (btnConvert == null) {
-            Toast.makeText(this, "마일리지 전환 버튼 ID를 찾지 못했습니다.", Toast.LENGTH_SHORT).show()
-        } else {
-            btnConvert.setOnClickListener {
-                openInAppWeb("마일리지 전환", URL_CONVERT_MILE)
-            }
+        btnConvert.setOnClickListener {
+            openHPointPreferApp(
+                appLink = CONVERT_APP_DEEPLINK,
+                httpsFallback = CONVERT_HTTPS_URL
+            )
         }
     }
 
-    private fun findButton(vararg idNames: String): Button? {
-        for (name in idNames) {
-            val resId = resources.getIdentifier(name, "id", packageName)
-            if (resId != 0) {
-                val btn = findViewById<Button?>(resId)
-                if (btn != null) return btn
-            }
-        }
-        return null
-    }
+    /**
+     * 1) 앱 딥링크 먼저 시도
+     * 2) 실패하면 앱 내 WebView(InAppWebActivity)로 HTTPS 열기
+     */
+    private fun openHPointPreferApp(appLink: String, httpsFallback: String) {
+        val appUri = Uri.parse(appLink)
+        val appIntent = Intent(Intent.ACTION_VIEW, appUri)
+        appIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
-    private fun openInAppWeb(title: String, url: String) {
-        val intent = Intent(this, InAppWebActivity::class.java).apply {
-            putExtra("title", title)
-            putExtra("url", url)
+        try {
+            startActivity(appIntent)
+        } catch (_: ActivityNotFoundException) {
+            // 앱이 없거나 딥링크가 막힌 경우: 앱 내 WebView로 HTTPS 열기
+            InAppWebActivity.start(this, httpsFallback)
         }
-        startActivity(intent)
-    }
-
-    // 필요 시 외부 브라우저로 열기
-    @Suppress("unused")
-    private fun openExternal(url: String) {
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
     }
 }
