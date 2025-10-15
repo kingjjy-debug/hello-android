@@ -1,0 +1,7 @@
+<resources>
+    <!-- 눈에 잘 띄는 임시 테마 -->
+    <style name="Theme.Hello.Force" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">#EEEEEE</item>
+        <item name="android:textColorPrimary">#000000</item>
+    </style>
+</resources>
