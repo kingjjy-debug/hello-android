@@ -5,55 +5,52 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    // 🔗 여기에 "정확히 원하는 목적지" URL을 넣어주세요 (HTTPS)
-    private val EARN_HTTPS_URL = "https://PUT_EARN_URL_HERE"
-    private val CONVERT_HTTPS_URL = "https://PUT_CONVERT_URL_HERE"
-
-    // 🔗 H.Point 앱 딥링크 예시 (실제 스킴/패스는 사용하던 값으로 교체)
-    // 예: "hpointapp://earn" 또는 "hpointapp://convert" 형태라면 아래 교체
-    private val EARN_APP_DEEPLINK = "hpointapp://earn"
-    private val CONVERT_APP_DEEPLINK = "hpointapp://convert"
+    // ★ 예전에 잘 가던 주소로 바꾸고 싶으면 아래 2개만 교체하세요.
+    private val earnUrl = "https://www.h-point.co.kr/app/point/earn"       // TODO: 이전에 쓰던 정확한 URL로 교체
+    private val convertUrl = "https://www.h-point.co.kr/app/mileage/convert" // TODO: 이전에 쓰던 정확한 URL로 교체
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        try {
+            setContentView(R.layout.activity_main)
 
-        val btnEarn = findViewById<Button>(R.id.btnEarnPoint)
-        val btnConvert = findViewById<Button>(R.id.btnConvertToMileage)
+            val btnEarn = findViewById<Button?>(R.id.btnEarnPoint)
+            val btnConvert = findViewById<Button?>(R.id.btnConvertToMileage)
 
-        btnEarn.setOnClickListener {
-            openHPointPreferApp(
-                appLink = EARN_APP_DEEPLINK,
-                httpsFallback = EARN_HTTPS_URL
-            )
-        }
+            if (btnEarn == null || btnConvert == null) {
+                // 레이아웃/ID가 맞지 않아도 앱이 죽지 않게 방어
+                Toast.makeText(this, "버튼 레이아웃을 찾지 못했습니다. (안전 모드)", Toast.LENGTH_LONG).show()
+                return
+            }
 
-        btnConvert.setOnClickListener {
-            openHPointPreferApp(
-                appLink = CONVERT_APP_DEEPLINK,
-                httpsFallback = CONVERT_HTTPS_URL
-            )
+            btnEarn.setOnClickListener {
+                openExternal(earnUrl)
+            }
+            btnConvert.setOnClickListener {
+                openExternal(convertUrl)
+            }
+
+        } catch (t: Throwable) {
+            // 어떤 초기화 오류도 여기서 흡수 -> 크래시 방지
+            Toast.makeText(this, "초기화 오류: ${t.javaClass.simpleName}", Toast.LENGTH_LONG).show()
         }
     }
 
-    /**
-     * 1) 앱 딥링크 먼저 시도
-     * 2) 실패하면 앱 내 WebView(InAppWebActivity)로 HTTPS 열기
-     */
-    private fun openHPointPreferApp(appLink: String, httpsFallback: String) {
-        val appUri = Uri.parse(appLink)
-        val appIntent = Intent(Intent.ACTION_VIEW, appUri)
-        appIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
+    private fun openExternal(url: String) {
+        val uri = Uri.parse(url)
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        // 굳이 Chrome 한정(setPackage) 하지 않음: 기본 브라우저로 열리도록
         try {
-            startActivity(appIntent)
-        } catch (_: ActivityNotFoundException) {
-            // 앱이 없거나 딥링크가 막힌 경우: 앱 내 WebView로 HTTPS 열기
-            InAppWebActivity.start(this, httpsFallback)
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            // 브라우저가 없을 경우 대안(거의 발생하지 않음)
+            val chooser = Intent.createChooser(intent, "브라우저 선택")
+            startActivity(chooser)
         }
     }
 }
