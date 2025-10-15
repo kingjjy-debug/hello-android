@@ -2,18 +2,19 @@
 set -euo pipefail
 
 # 사용법:
-#   ./scripts/build_and_monitor.sh [owner/repo] [--once|--quiet|--verbose] [--interval=초] [--no-empty-commit]
+#   ./scripts/build_and_monitor.sh [owner/repo] [--once|--quiet|--verbose] [--interval=초] [--no-empty-commit|--allow-empty-commit]
 # 기본값:
 #   - 폴링 출력: --once (한 번만 출력)
 #   - 폴링 주기: 5초
-#   - 변경이 없을 때도 새 런을 보장하려고 기본적으로 빈 커밋을 만들어 트리거합니다.
-#     이를 끄려면 --no-empty-commit
+#   - 기본적으로 **빈 커밋을 만들지 않습니다**. (변경이 없으면 새 런을 만들지 않음)
+#     필요 시 --allow-empty-commit 옵션으로 빈 커밋을 생성해 트리거할 수 있습니다.
 
 REPO=""
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 ERROR_LOG="Error_Log.txt"
 ONCE=1; QUIET=0; VERBOSE=0; INTERVAL=5
-ALLOW_EMPTY=1
+# 기본값 변경: 빈 커밋 금지
+ALLOW_EMPTY=0
 
 for arg in "$@"; do
   case "$arg" in
@@ -23,6 +24,7 @@ for arg in "$@"; do
     --verbose) VERBOSE=1; ONCE=0; QUIET=0 ;;
     --interval=*) INTERVAL="${arg#*=}" ;;
     --no-empty-commit) ALLOW_EMPTY=0 ;;
+    --allow-empty-commit) ALLOW_EMPTY=1 ;;
     *) ;;
   esac
 done
@@ -43,7 +45,7 @@ fi
 echo "[INFO] Repository: $REPO"
 echo "[INFO] Branch: $BRANCH"
 
-# 변경사항 커밋(없으면 빈 커밋으로 강제 트리거)
+# 변경사항 커밋(있을 때만). 없으면 옵션에 따라 빈 커밋.
 if ! git diff --quiet || ! git diff --cached --quiet; then
   git add -A
   git commit -m "ci: trigger build at $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
