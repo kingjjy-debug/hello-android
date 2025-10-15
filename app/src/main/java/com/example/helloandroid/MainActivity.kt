@@ -28,8 +28,10 @@ data class Partner(
     val warningText: String,
     val packageName: String?,        // 실행 대상 앱 패키지
     val playStoreUrl: String?,       // 구글플레이 웹 URL
-    val earnWebFallback: String?,    // 최후 폴백(포인트 모으기)
-    val convertWebFallback: String?, // 최후 폴백(마일리지 전환)
+    val earnDeepLink: String?,       // 포인트 모으기용 딥링크/앱링크 URL
+    val convertDeepLink: String?,    // 전환 화면 진입용 딥링크/앱링크 URL
+    val earnWebFallback: String?,    // 최후 웹 폴백
+    val convertWebFallback: String?, // 최후 웹 폴백
     val officialDocs: List<String>
 )
 
@@ -42,13 +44,15 @@ class MainActivity : ComponentActivity() {
             brandColorArgb = 0xFF007AFF,
             ratioLabel = "22P → 1마일",
             limitLabel = "1일 1회",
-            earnTips = listOf("출석체크", "광고보기", "설문 참여"),
+            earnTips = listOf("출석룰렛", "포인트워크", "미션/퀴즈"),
             warningText = "현금충전·선물·타사전환 포인트는 전환 불가",
-            packageName = "kr.co.hpoint.hdgm", // ✅ 정확한 패키지명
+            packageName = "kr.co.hpoint.hdgm",
             playStoreUrl = "https://play.google.com/store/apps/details?id=kr.co.hpoint.hdgm",
-            earnWebFallback = "https://www.h-point.co.kr/",           // 포인트 모으기용 최후 폴백(포털)
-            convertWebFallback = "https://www.h-point.co.kr/",        // 전환 안내로 연결되는 진입 포털
-            officialDocs = listOf("https://www.h-point.co.kr/")       // 안내/공지 확인
+            earnDeepLink = "https://www.h-point.co.kr/stack/joy.nhd",       // 포인트 모으기 허브
+            convertDeepLink = "https://www.h-point.co.kr/stack/change.nhd",  // 전환 진입
+            earnWebFallback = "https://www.h-point.co.kr/",
+            convertWebFallback = "https://www.h-point.co.kr/",
+            officialDocs = listOf("https://www.h-point.co.kr/")
         )
     )
 
@@ -59,54 +63,65 @@ class MainActivity : ComponentActivity() {
                 Surface(Modifier.fillMaxSize()) {
                     MainScreen(
                         partners = partners,
-                        onEarnClick = { openPartnerAppOrWeb(it, isConvert = false) },
-                        onConvertClick = { openPartnerAppOrWeb(it, isConvert = true) }
+                        onEarnClick = { p -> openHPointLink(isConvert = false, p) },
+                        onConvertClick = { p -> openHPointLink(isConvert = true, p) }
                     )
                 }
             }
         }
     }
 
-    private fun openPartnerAppOrWeb(
-        partner: Partner,
-        isConvert: Boolean
-    ) {
-        // 1) 앱 실행 시도
-        partner.packageName?.let { pkg ->
-            val launchIntent = packageManager.getLaunchIntentForPackage(pkg)
-            if (launchIntent != null) {
-                try {
-                    startActivity(launchIntent)
-                    return
-                } catch (_: Exception) {
-                    // 앱 실행 실패 시 다음 단계로 폴백
-                }
-            }
+    private fun openHPointLink(isConvert: Boolean, partner: Partner) {
+        val pkg = partner.packageName
+        val firstUrl = if (isConvert) partner.convertDeepLink else partner.earnDeepLink
+        val lastUrl = if (isConvert) partner.convertWebFallback else partner.earnWebFallback
+
+        // 1) 앱링크를 앱 패키지로 강제 열기 (앱이 해당 URL을 인식하면 바로 해당 화면)
+        if (pkg != null && firstUrl != null) {
+            try {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(firstUrl)).setPackage(pkg)
+                startActivity(intent)
+                return
+            } catch (_: Exception) { /* 다음 단계 */ }
         }
 
-        // 2) 마켓(앱 상세)로 폴백
-        partner.packageName?.let { pkg ->
+        // 2) 앱링크를 일반 VIEW로 열어(패키지 미지정) 앱이 가로채도록 시도
+        if (firstUrl != null) {
+            try {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(firstUrl)))
+                return
+            } catch (_: Exception) { /* 다음 단계 */ }
+        }
+
+        // 3) 앱 메인 실행 (그래도 해당 섹션으로 못 갔을 때 최소한 앱은 켜주자)
+        if (pkg != null) {
+            try {
+                val launch = packageManager.getLaunchIntentForPackage(pkg)
+                if (launch != null) {
+                    startActivity(launch)
+                    return
+                }
+            } catch (_: Exception) { /* 다음 단계 */ }
+        }
+
+        // 4) 마켓 앱 상세
+        if (pkg != null) {
             try {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$pkg")))
                 return
-            } catch (_: ActivityNotFoundException) {
-                // 일부 기기/스토어 미설치 → 웹 URL 시도
-            }
+            } catch (_: ActivityNotFoundException) { /* 다음 단계 */ }
         }
 
-        // 3) 플레이 스토어 웹 URL로 폴백
-        partner.playStoreUrl?.let { url ->
+        // 5) 플레이 스토어 웹
+        partner.playStoreUrl?.let {
             try {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it)))
                 return
-            } catch (_: Exception) {
-                // 마지막 단계로 웹 폴백 시도
-            }
+            } catch (_: Exception) { /* 다음 단계 */ }
         }
 
-        // 4) 최후 폴백: 각 버튼 성격별 웹 링크
-        val last = if (isConvert) partner.convertWebFallback else partner.earnWebFallback
-        last?.let {
+        // 6) 최후 웹 폴백
+        lastUrl?.let {
             try {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it)))
             } catch (_: Exception) { /* 포기 */ }
