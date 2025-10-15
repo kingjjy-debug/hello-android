@@ -17,5 +17,6 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".mileage.MileageActivity" />
     </application>
 </manifest>
