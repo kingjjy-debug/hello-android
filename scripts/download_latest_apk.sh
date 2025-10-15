@@ -96,11 +96,21 @@ echo "[INFO] Artifact ID: $ARTIFACT_ID"
 WORKDIR="$(mktemp -d)"
 ZIPFILE="${WORKDIR}/artifact.zip"
 
-# 아티팩트 다운로드 (zip)
-gh api "repos/${REPO}/actions/artifacts/${ARTIFACT_ID}/zip" -H "Accept: application/zip" > "$ZIPFILE"
-unzip -q "$ZIPFILE" -d "$WORKDIR"
+# 아티팩트 다운로드 (gh run download 사용 - Termux 호환)
+TMPDIR="${WORKDIR}/dl"
+mkdir -p "$TMPDIR"
+gh run download "$RUN_ID" --repo "$REPO" -n "$ARTIFACT_NAME" --dir "$TMPDIR"
 
 # APK 찾기
+APK_PATH="$(find "$TMPDIR" -type f -name '*.apk' | head -n1 || true)"
+if [[ -z "$APK_PATH" ]]; then
+  # zip으로 직접 받은 경우(이전 행동) 대비: 워크디렉토리도 탐색
+  APK_PATH="$(find "$WORKDIR" -type f -name '*.apk' | head -n1 || true)"
+fi
+if [[ -z "$APK_PATH" ]]; then
+  echo "❌ 아티팩트에서 APK 파일을 찾지 못했습니다."
+  exit 5
+fi
 APK_PATH="$(find "$WORKDIR" -type f -name '*.apk' | head -n1 || true)"
 if [[ -z "$APK_PATH" ]]; then
   echo "❌ ZIP 안에서 APK 파일을 찾지 못했습니다."
