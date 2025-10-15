@@ -15,9 +15,20 @@ android {
         versionName "1.0"
     }
 
+    // ✅ 자바/코틀린 타깃을 17로 통일
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions { jvmTarget = "17" }
+
     buildFeatures { compose true }
     composeOptions { kotlinCompilerExtensionVersion = "1.5.14" }
-    kotlinOptions { jvmTarget = "17" }
+}
+
+// ✅ Kotlin 툴체인도 17로 고정 (Gradle 8 + Kotlin 1.9.x에서 권장)
+kotlin {
+    jvmToolchain(17)
 }
 
 dependencies {
@@ -29,9 +40,7 @@ dependencies {
     implementation 'androidx.compose.material3:material3:1.3.0'
     debugImplementation 'androidx.compose.ui:ui-tooling'
 
-    // ✅ Material Components (MDC) — styles.xml이 Theme.MaterialComponents를 사용 중
+    // MDC + AppCompat (styles.xml이 MaterialComponents 기반일 때 필요)
     implementation 'com.google.android.material:material:1.12.0'
-
-    // ✅ AppCompat (권장: 일부 테마/위젯 의존)
     implementation 'androidx.appcompat:appcompat:1.7.0'
 }
