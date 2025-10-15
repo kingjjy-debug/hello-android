@@ -15,8 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-
-// 추가 import (명시적)
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.RowScope
 
@@ -254,5 +252,5 @@ fun AppTopBar(
     title: @Composable () -> Unit,
     actions: @Composable RowScope.() -> Unit
 ) {
-    SmallTopAppBar(title = title, actions = actions)
+    TopAppBar(title = title, actions = actions)
 }
