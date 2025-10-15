@@ -12,8 +12,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+
+// 추가 import (명시적)
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.RowScope
 
 data class Partner(
     val id: String,
@@ -32,12 +37,11 @@ data class Partner(
 
 class MainActivity : ComponentActivity() {
 
-    // 1차: H.Point만. 이후 OK캐쉬백/네이버페이/L.POINT/KB포인트리/Hyatt 추가 예정
     private val partners = listOf(
         Partner(
             id = "hpoint",
             displayName = "H.Point",
-            brandColorArgb = 0xFF007AFF, // 파란 악센트
+            brandColorArgb = 0xFF007AFF,
             ratioLabel = "22P → 1마일",
             limitLabel = "1일 1회",
             earnTips = listOf("출석체크", "광고보기", "설문 참여"),
@@ -69,7 +73,7 @@ class MainActivity : ComponentActivity() {
         partner: Partner,
         isConvert: Boolean
     ) {
-        // 1) 앱 실행 우선
+        // 1) 앱 실행 시도
         partner.packageName?.let { pkg ->
             val launchIntent = packageManager.getLaunchIntentForPackage(pkg)
             if (launchIntent != null) {
@@ -77,18 +81,19 @@ class MainActivity : ComponentActivity() {
                 return
             }
         }
-        // 2) 미설치 → Play 스토어
+        // 2) 스토어로 폴백
         partner.packageName?.let { pkg ->
             try {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$pkg")))
                 return
             } catch (_: ActivityNotFoundException) {
-                // 마켓 앱 없으면 웹 스토어
-                partner.playStoreUrl?.let { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it))) }
+                partner.playStoreUrl?.let {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it)))
+                }
                 return
             }
         }
-        // 3) 최후: 공식 안내 웹(전환/모으기 각각)
+        // 3) 최후 웹 폴백
         val url = if (isConvert) partner.convertWebFallback else partner.earnWebFallback
         url?.let { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it))) }
     }
@@ -103,7 +108,7 @@ fun MainScreen(
     var showNotice by remember { mutableStateOf(true) }
 
     Column(Modifier.fillMaxSize()) {
-        TopAppBar(
+        AppTopBar(
             title = { Text("대한항공 마일리지 모으기") },
             actions = {}
         )
@@ -150,6 +155,7 @@ fun PartnerCard(
     onConvertClick: (Partner) -> Unit
 ) {
     var showInfo by remember { mutableStateOf(false) }
+    val context = LocalContext.current
 
     Card(
         shape = RoundedCornerShape(16.dp),
@@ -166,9 +172,11 @@ fun PartnerCard(
                     fontWeight = FontWeight.SemiBold
                 )
                 Spacer(Modifier.weight(1f))
-                AssistBadge(partner.ratioLabel)
+                AssistChip(onClick = {}, label = { Text(partner.ratioLabel) })
                 Spacer(Modifier.width(6.dp))
-                partner.limitLabel?.let { AssistBadge(it) }
+                partner.limitLabel?.let {
+                    AssistChip(onClick = {}, label = { Text(it) })
+                }
             }
             Spacer(Modifier.height(8.dp))
             Text(
@@ -227,12 +235,8 @@ fun PartnerCard(
                     val first = partner.officialDocs.first()
                     TextButton(
                         onClick = {
-                            // 공식 링크 열기
-                            // AlertDialog 내에서는 Intent 전달이 어려워 상위에서 처리하지 않고
-                            // 간단한 VIEW Intent로 열기
                             try {
-                                val ctx = LocalContext.current
-                                ctx.startActivity(
+                                context.startActivity(
                                     Intent(Intent.ACTION_VIEW, Uri.parse(first))
                                 )
                             } catch (_: Exception) { }
@@ -244,16 +248,11 @@ fun PartnerCard(
     }
 }
 
-@Composable
-fun AssistBadge(text: String) {
-    AssistChip(
-        onClick = { /* no-op */ },
-        label = { Text(text) }
-    )
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBar(title: @Composable () -> Unit, actions: @Composable RowScope.() -> Unit) {
+fun AppTopBar(
+    title: @Composable () -> Unit,
+    actions: @Composable RowScope.() -> Unit
+) {
     SmallTopAppBar(title = title, actions = actions)
 }
