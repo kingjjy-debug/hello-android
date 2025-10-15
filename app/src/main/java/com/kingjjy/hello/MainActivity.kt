@@ -1,26 +1,41 @@
 package com.kingjjy.hello
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.kingjjy.hello.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        findViewById<Button>(R.id.btnEarnPoint).setOnClickListener {
-            openExternal("https://www.h-point.co.kr/earn")          // 필요시 URL 바꿔도 됨
+        // 실제 열릴 URL
+        val earnPointUrl = "https://www.h-point.co.kr/event"      // 포인트 모으기
+        val mileageUrl   = "https://www.h-point.co.kr/mileage"    // 마일리지 전환
+
+        binding.btnEarnPoint.setOnClickListener {
+            openExternal(earnPointUrl)
         }
-        findViewById<Button>(R.id.btnConvertToMileage).setOnClickListener {
-            openExternal("https://www.h-point.co.kr/convert")       // 필요시 URL 바꿔도 됨
+        binding.btnConvertToMileage.setOnClickListener {
+            openExternal(mileageUrl)
         }
     }
 
     private fun openExternal(url: String) {
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+        val uri = Uri.parse(url)
+        val intent = Intent(Intent.ACTION_VIEW, uri).apply {
+            addCategory(Intent.CATEGORY_BROWSABLE)
+        }
+        try {
+            startActivity(intent)
+        } catch (_: ActivityNotFoundException) {
+        }
     }
 }
